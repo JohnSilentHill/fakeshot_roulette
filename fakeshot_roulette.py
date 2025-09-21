@@ -352,7 +352,7 @@ def itemGuide(): # Only for use on the menu
     for line in lines:
         typing(line)
 
-# ACTUAL GAME SHIT
+# ACTUAL GAME STUFF
 
 def preGame(game):
     game.liveShells = random.randint(1, 4)

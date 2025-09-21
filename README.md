@@ -16,18 +16,18 @@ Feel free to fork and create pull requests as you please. If you are more experi
 
 ### Completed
 
-[x] Main game loop
-[x] Basic usage of items
-[x] Optimisation using gamestates
+- [x] Main game loop
+- [x] Basic usage of items
+- [x] Optimisation using gamestates
 
 ### Upcoming
 
-[ ] More items to match original roster
-[ ] Different rounds to mimic original game
-[ ] Intelligent AI -- I will literally just make it so it judges whether or not to shoot.
-[ ] Difficulties
-[ ] Debug mode
-[ ] Better text output for a more visually appealing experience
-[ ] Money
-[ ] Save files
+- [ ] More items to match original roster
+- [ ] Different rounds to mimic original game
+- [ ] Intelligent AI -- I will literally just make it so it judges whether or not to shoot.
+- [ ] Difficulties
+- [ ] Debug mode
+- [ ] Better text output for a more visually appealing experience
+- [ ] Money
+- [ ] Save files
 

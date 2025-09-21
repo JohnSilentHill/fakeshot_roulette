@@ -2,6 +2,8 @@
 
 # General Info
 
+You can read up on the game on the [wiki](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette_Wik) or use the 'info' command in-game.
+
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <br/>
 It should contain the .py file and a .json save file.
 

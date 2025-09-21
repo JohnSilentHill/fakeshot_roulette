@@ -5,7 +5,7 @@
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <br/>
 It should contain the .py file and two .json save files.
 
-> The save file is fully modifiable just by opening the `savegame.json` file in an editor such as Notepad++ or VS Code. 
+> The save file is fully modifiable by opening the `savegame.json` file in an editor such as Notepad++ or VS Code. 
 
 This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look. <br/>

@@ -7,7 +7,7 @@ It should contain the .py file and a .json save file.
 
 > All save data is 0 by default but fully modifiable by editing the `savegame.json` file (use Notepad++ or VS Code if unsure).
 
-For debug, you can use the 'debug' command when it is **your turn** after starting the game. This isn't accessible on the main menu because it frankly has no use there.
+For debug, you can use the `debug` command when it is **your turn** after starting the game. This isn't accessible on the main menu because it frankly has no use there.
 
 This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look. <br/>

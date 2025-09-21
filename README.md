@@ -4,6 +4,8 @@
 
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <br/>
 
+Currently, there are *most* of the items from the original game bar a few multiplayer-specific ones that probably won't be added since this is offline only. 
+
 You can use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette_Wik) or the 'info' command in-game for help.
 
 ### Boring things
@@ -17,7 +19,7 @@ Feel free to fork and create pull requests as you please. If you are more experi
 
 ------
 
-*Disclaimer: I do not claim to have invented this as all credit goes to Mike Klubnika for his original work. <br/>*
+*Disclaimer: I have not invented the original game nor do I claim ownership of any copyright associated. All credit goes to Mike Klubnika for his original work. <br/>*
 *You can view his other projects on his website at [https://mikeklubnika.com/](https://mikeklubnika.com/)*
 
 ------

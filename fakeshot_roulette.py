@@ -1,4 +1,4 @@
-import os, json, sys, time, random
+import os, json, sys, time, random, msvcrt
 
 logoText = """
  _____ _____ _____ _____ _____ _____ _____ _____    _____ _____ _____ __    _____ _____ _____ _____ 
@@ -23,6 +23,7 @@ def save_game(game):
         json.dump(savegame, f, indent=4)
     typing("Game saved.")
 
+# TEXT OUTPUT
 
 def typing(text, delay=0.025):
     for character in text:
@@ -39,13 +40,15 @@ def typingFast(text, delay=0.0125):
     print()
 
 # GAME STATES
+
 class GameState:
     def __init__(self):
         self.money = 0
         self.playerLives = 3
         self.aiLives = 3
         self.isSawed = False
-        self.aiSkipTurn = False
+        self.aiHandcuffed = False
+        self.playerHandcuffed = False
         self.wins = 0
         self.liveShells = 0
         self.blankShells = 0
@@ -59,6 +62,37 @@ class GameState:
     def cap_lives(self):
         self.playerLives = min(self.playerLives, 3)
         self.aiLives = min(self.aiLives, 3)
+
+# DEBUG
+
+def debug(game):
+
+    itemsDisplay = ", ".join(item.__name__ for item in game.playerItems)
+
+    debugOutput = [
+        "",
+        "----- DEBUG & OTHER INFO -----",
+        "",
+        f"money:             {game.money}",
+        f"wins:              {game.wins}",
+        f"playerLives:       {game.playerLives}",
+        f"aiLives:           {game.aiLives}",
+        f"isSawed?:          {game.isSawed}",
+        f"playerHandcuffed?: {game.playerHandcuffed}", 
+        f"aiHandcuffed?:     {game.aiHandcuffed}",
+        f"liveShells:        {game.liveShells}",
+        f"liveShells:        {game.blankShells}",
+        f"shellPool:         {game.shellPool}",
+        f"playerItems:       [{itemsDisplay}]"
+    ]
+
+    for line in debugOutput:
+            typingFast(line)
+
+    typingFast("\nPress any key to resume...")
+    msvcrt.getch()
+    yourTurn(game)
+    
 
 # ITEM FUNCTIONS
 
@@ -102,7 +136,7 @@ def magnifying_glass(game):
 
 def handcuffs(game):
     typing("\nYou give your opponent the handcuffs. They pass the next turn.") # What a sucker
-    game.aiSkipTurn = True
+    game.aiHandcuffed = True
     if handcuffs in game.playerItems:
         game.playerItems.remove(handcuffs)
     yourTurn(game)
@@ -208,7 +242,7 @@ def shootAI(game):
         aiTurn(game)
 
 
-def yourTurn(game):
+def yourTurn(game): # YOUR TURN
     if game.aiLives <= 0:
         win(game)
         return
@@ -237,18 +271,20 @@ def yourTurn(game):
         shootSelf(game)
     elif turnAction == "ai":
         shootAI(game)
+    elif turnAction == "debug":
+        debug(game)
     else:
         typing("Invalid input.")
         yourTurn(game)
 
-def aiTurn(game):
+def aiTurn(game): # AI TURN
     if game.aiLives <= 0:
         win(game)
         return
 
-    if game.aiSkipTurn:
+    if game.aiHandcuffed:
         typing("\nAI skips its turn due to handcuffs.")
-        game.aiSkipTurn = False
+        game.aiHandcuffed = False
         yourTurn(game)
         return
 
@@ -349,10 +385,10 @@ def menu(game):
         menu(game)
     elif menuInput == "quit":
         save_game(game)
-        typing("Exiting...")
+        typing("\nExiting...")
         quit()
     else:
-        typing("Not a valid input.")
+        typing("\nNot a valid input.")
         menu(game)
 
 # START GAME

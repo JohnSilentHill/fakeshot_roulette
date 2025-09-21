@@ -11,8 +11,9 @@ You can use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Bucksh
 - For debug, you can use the `debug` command when it is **your turn** after starting the game. This isn't accessible on the main menu because it frankly has no use there.
 - This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look. <br/>
+- Your save is blank by default, with no wins or money. If you don't want to play the game - or are just looking to debug - read below...
 
-> All save data is 0 by default but fully modifiable by editing the `savegame.json` file under the parent directory (use Notepad++ or VS Code if unsure).
+> Note: saves are fully modifiable by editing the `savegame.json` file under the parent directory (use Notepad++ or VS Code if unsure).
 
 ------
 

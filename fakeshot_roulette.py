@@ -1,4 +1,6 @@
-import sys, time, random
+import os, json, sys, time, random
+
+save_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "savegame.json")
 
 def typing(text, delay=0.025):
     for character in text:
@@ -6,6 +8,16 @@ def typing(text, delay=0.025):
         sys.stdout.flush()
         time.sleep(delay)
     print()
+
+def save_game(game):
+    savegame = {
+        "wins": game.wins,
+    }
+
+    save_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "savegame.json")
+    with open(save_path, 'w') as f:
+        json.dump(savegame, f, indent=4)
+    typing("Game saved.")
 
 # Game states
 class GameState:
@@ -271,7 +283,7 @@ def menu(game):
     typing("-----------------\nFAKESHOT ROULETTE\n-----------------")
     time.sleep(0.5)
     typing(f"You have {game.wins} win(s).")
-    typing("Use [start] to begin or [info] for more info...")
+    typing("Use [start], [info], or [quit] to save and quit...")
 
     menuInput = input("> ").strip().lower()
     if menuInput == "start":
@@ -280,6 +292,10 @@ def menu(game):
         typing("-----------------\nINFO\n-----------------")
         itemGuide()
         menu(game)
+    elif menuInput == "quit":
+        save_game(game)
+        typing("Saving and exiting game...")
+        quit()
     else:
         typing("Not a valid input.")
         menu(game)
@@ -288,4 +304,11 @@ def menu(game):
 
 if __name__ == "__main__":
     game = GameState()
+
+    save_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "savegame.json")
+    if os.path.exists(save_path):
+        with open(save_path, 'r') as f:
+            savegame = json.load(f)
+            game.wins = savegame.get("wins", 0)
+
     menu(game)

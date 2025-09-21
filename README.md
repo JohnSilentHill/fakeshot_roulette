@@ -10,7 +10,6 @@ It should contain the .py file and two .json save files.
 > Choose 1 file ONLY, you can always edit it to your liking later and the modified one is just for debugging convenience.
 
  <br/>
-
 This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look. <br/>
 

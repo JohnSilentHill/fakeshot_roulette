@@ -90,6 +90,39 @@ def handcuffs(game):
         game.playerItems.remove(handcuffs)
     yourTurn(game)
 
+def cigarettes(game):
+    typing("You smoke a cigarette...")
+    if game.playerLives == 3:
+        typing("Max health already.")
+    else:
+        typing("+1 life.")
+        game.playerLives += 1
+    if cigarettes in game.playerItems:
+        game.playerItems.remove(cigarettes)
+    yourTurn(game)
+
+def phone(game):
+    typing("You pick up your burner phone..."), time.sleep(1)
+    # typing("'Shell {shellnum}, {shelltype}.") # E.g: 'Shell 4, blank.'
+    if phone in game.playerItems:
+        game.playerItems.remove(phone)
+    yourTurn(game)
+
+def medicine(game):
+    typing("You take a pill...")
+    medicineResult = random.randint(0,1)
+    if medicineResult == 1:
+        if game.playerLives == 1:
+            typing("+2 lives.")
+            game.playerLives += 2
+        elif game.playerLives ==2:
+            typing("+1 life.")
+            game.playerLives += 1
+        else:
+            typing("Max health already.")
+    else:
+        typing("It was expired. -1 life.")
+
 # SHOOTING
 
 def shootSelf(game):
@@ -260,7 +293,9 @@ def itemGuide(): # Only for use on the menu
         "BEER:               Ejects 1 shell from the chamber.",
         "SAW:                Saws off the barrel, doubling damage for next shot.",
         "MAGNIFYING_GLASS:   Shows the next shell.",
-        "HANDCUFFS:          Wearer skips their next turn."
+        "HANDCUFFS:          Wearer skips their next turn.",
+        "CIGARETTES:         Restores 1 health.",
+        "PHONE:              Reveals info about a random shell."
     ]
     for line in lines:
         typing(line)
@@ -273,7 +308,7 @@ def preGame(game):
     game.shellPool = ['live'] * game.liveShells + ['blank'] * game.blankShells
     random.shuffle(game.shellPool)
 
-    all_items = [beer, saw, magnifying_glass, handcuffs]
+    all_items = [beer, saw, magnifying_glass, handcuffs, cigarettes, phone, medicine]
     game.playerItems = random.sample(all_items, 3)
 
     game.reset_lives()

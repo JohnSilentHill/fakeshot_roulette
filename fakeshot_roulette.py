@@ -96,7 +96,7 @@ def debug(game):
 
 # ITEM FUNCTIONS
 
-def beer(game):
+def beer(game): # -----> BEER
     if not game.shellPool:
         typing("\nNo shells left to eject.")
         return
@@ -114,7 +114,7 @@ def beer(game):
 
     yourTurn(game)
 
-def saw(game):
+def saw(game): # -----> SAW
     game.isSawed = True
     typing("\nYou saw off the barrel. Double damage next shot.")
     if saw in game.playerItems:
@@ -134,23 +134,21 @@ def magnifying_glass(game):
 
     yourTurn(game)
 
-def handcuffs(game):
+def handcuffs(game): # -----> HANDCUFFS
     typing("\nYou give your opponent the handcuffs. They pass the next turn.") # What a sucker
     game.aiHandcuffed = True
     if handcuffs in game.playerItems:
         game.playerItems.remove(handcuffs)
     yourTurn(game)
 
-def fivehundredcigarettes(game):
+def cigarettes(game): # -----> CIGARETTES
     global money
-    typing("\nFive Hundred Cigarettes.")
-    typing("\nYou gain $500")
-    game.money += 500
-
-def cigarettes(game):
     roll500 = random.randint(1,100)
     if roll500 == "1":
-        fivehundredcigarettes()
+        typing("\nFive Hundred Cigarettes.")
+        typing("\nYou gain $500")
+        game.money += 500
+    game.money += 500
     typing("\nYou smoke a cigarette...")
     if game.playerLives == 3:
         typing("Max health already.")
@@ -161,14 +159,14 @@ def cigarettes(game):
         game.playerItems.remove(cigarettes)
     yourTurn(game)
 
-def phone(game):
+def phone(game): # -----> PHONE
     typing("\nYou pick up your burner phone..."), time.sleep(1)
     # typing("'Shell {shellnum}, {shelltype}.") # E.g: 'Shell 4, blank.'
     if phone in game.playerItems:
         game.playerItems.remove(phone)
     yourTurn(game)
 
-def medicine(game):
+def medicine(game): # -----> MEDICINE
     typing("\nYou take a pill...")
     time.sleep(1)
     medicineResult = random.randint(0,1)

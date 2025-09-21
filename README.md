@@ -24,10 +24,10 @@ Feel free to fork and create pull requests as you please. If you are more experi
 - [x] Main game loop
 - [x] Basic usage of items
 - [x] Optimisation using gamestates
+- [ ] Save file reading/loading
 
 ### Upcoming
 
-- [ ] Save file reading
 - [ ] Debug mode
 - [ ] More items to match original roster
 - [ ] Different rounds to mimic original game

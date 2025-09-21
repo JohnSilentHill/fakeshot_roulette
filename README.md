@@ -3,19 +3,23 @@
 # General Info
 
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <br/>
-It should contain the .py file and a .json save file.
 
-> All save data is 0 by default but fully modifiable by editing the `savegame.json` file (use Notepad++ or VS Code if unsure).
+Currently, there are *most* of the items from the original game bar a few multiplayer-specific ones that probably won't be added since this is offline only. 
 
-This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
+You can use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette_Wik) or the 'info' command in-game for help.
+
+### Boring things
+
+- For debug, you can use the `debug` command when it is **your turn** after starting the game. This isn't accessible on the main menu because it frankly has no use there.
+- This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look. <br/>
+- Your save is blank by default, with no wins or money. You can simply play the game or edit your save manually to fix this glaring issue.
 
-You can also use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette_Wik) or the 'info' command in-game for help.
+> Open the `savegame.json` file under the parent directory in any text exitor of your choice. The values are pretty self-explanatory.
 
 ------
 
-*Disclaimer: I do not claim to have invented this as all credit goes to Mike Klubnika for his original work. <br/>*
-*You can view his other projects on his website at [https://mikeklubnika.com/](https://mikeklubnika.com/)*
+*Disclaimer: I have not invented the original game nor do I claim ownership of any copyright associated. All credit goes to [Mike Klubnika](https://mikeklubnika.com/). <br/>*
 
 ------
 
@@ -27,10 +31,10 @@ You can also use the official [wiki](https://buckshot-roulette.fandom.com/wiki/B
 - [x] Basic usage of items
 - [x] Optimisation using gamestates
 - [x] Save file reading/loading (I think)
+- [X] Debug command
 
 ### Upcoming
 
-- [ ] Debug mode
 - [ ] More items to match original roster
 - [ ] Different rounds to mimic original game
 - [ ] Intelligent AI -- I will literally just make it so it judges whether or not to shoot.

@@ -1,13 +1,8 @@
 import os, json, sys, time, random
 
-save_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "savegame.json")
+# SAVING
 
-def typing(text, delay=0.025):
-    for character in text:
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        time.sleep(delay)
-    print()
+save_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "savegame.json")
 
 def save_game(game):
     savegame = {
@@ -19,7 +14,15 @@ def save_game(game):
         json.dump(savegame, f, indent=4)
     typing("Game saved.")
 
-# Game states
+
+def typing(text, delay=0.025):
+    for character in text:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
+# GAME STATES
 class GameState:
     def __init__(self):
         self.playerLives = 3

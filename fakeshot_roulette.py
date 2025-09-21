@@ -295,7 +295,8 @@ def itemGuide(): # Only for use on the menu
         "MAGNIFYING_GLASS:   Shows the next shell.",
         "HANDCUFFS:          Wearer skips their next turn.",
         "CIGARETTES:         Restores 1 health.",
-        "PHONE:              Reveals info about a random shell."
+        "PHONE:              Reveals info about a random shell.",
+        "MEDICINE:           If normal: restores 2 lives, if expired: removes 1 life."
     ]
     for line in lines:
         typing(line)
@@ -332,7 +333,7 @@ def menu(game):
         menu(game)
     elif menuInput == "quit":
         save_game(game)
-        typing("Saving and exiting game...")
+        typing("Exiting...")
         quit()
     else:
         typing("Not a valid input.")

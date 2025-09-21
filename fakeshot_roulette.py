@@ -44,7 +44,7 @@ def beer(game):
         game.blankShells -= 1
 
     if beer in game.playerItems:
-        game.playerItems.remove(beer)
+        game.playerItems.remove(beer) # Removes the item from your inventory
 
     yourTurn(game)
 
@@ -58,7 +58,7 @@ def saw(game):
 def magnifying_glass(game):
     typing("\nYou check the chamber...")
     if not game.shellPool:
-        typing("The chamber is empty.")
+        typing("The chamber is empty.") # This shouldn't happen, but it's here in case something goes horribly wrong
     else:
         chambered = game.shellPool[0]
         typing(f"The next shell is a {chambered.upper()}.")
@@ -69,7 +69,7 @@ def magnifying_glass(game):
     yourTurn(game)
 
 def handcuffs(game):
-    typing("You pass your opponent the handcuffs. They pass the next turn.")
+    typing("You pass your opponent the handcuffs. They pass the next turn.") # What a sucker
     game.aiSkipTurn = True
     if handcuffs in game.playerItems:
         game.playerItems.remove(handcuffs)
@@ -81,12 +81,12 @@ def shootSelf(game):
     if checkShells(game):
         return
 
-    shell = game.shellPool.pop(0)
+    shell = game.shellPool.pop(0) # Selects the first shell in the sequence
 
     if shell == 'live':
         typing("You point the barrel at yourself..."), time.sleep(1), typing("BANG.")
         if game.isSawed:
-            typing("\nSawed-off barrel deals double damage...\n-2 lives")
+            typing("\nSawed-off barrel deals double damage...\n-2 lives") # Rough
             game.playerLives -= 2
         else:
             typing("-1 life.")
@@ -97,7 +97,7 @@ def shootSelf(game):
         game.blankShells -= 1
 
     if game.isSawed:
-        typing("Barrel restored to default.")
+        typing("Barrel restored to default.") # The barrel is restored to default regardless of shell outcome
         game.isSawed = False
 
     game.cap_lives()
@@ -120,7 +120,7 @@ def shootAI(game):
     if shell == 'live':
         typing("\nYou aim at the AI..."), time.sleep(1), typing("BANG.")
         if game.isSawed:
-            typing("\nSawed-off barrel deals double damage.\n-2 AI lives.")
+            typing("\nSawed-off barrel deals double damage.\n-2 AI lives.") # Good call dude
             game.aiLives -= 2
         else:
             typing("\n-1 AI life.")
@@ -158,8 +158,8 @@ def yourTurn(game):
     itemsDisplay = ", ".join(item.__name__ for item in game.playerItems)
     typing(itemsDisplay)
 
-    typing("\nUse item [itemname] or [me/ai] to shoot...")
-    turnAction = input("> ").strip().lower()
+    typing("\nUse item [itemname] or [me/ai] to shoot...") # Crappy input dialogue, oh well
+    turnAction = input("> ").strip().lower() # Do I need this?
 
     for item in game.playerItems:
         if turnAction == item.__name__.lower():
@@ -237,10 +237,10 @@ def dead():
 
 # DISPLAY
 
-def shellDisplay(game):
-    typing(f"\n{game.liveShells} live shell(s), {game.blankShells} blank shell(s)")
+def shellDisplay(game): # Displays on each turn
+    typing(f"\n{game.liveShells} live shell(s), {game.blankShells} blank shell(s)") 
 
-def itemGuide():
+def itemGuide(): # Only for use on the menu
     lines = [
         "BEER:               Ejects 1 shell from the chamber.",
         "SAW:                Saws off the barrel, doubling damage for next shot.",
@@ -250,7 +250,7 @@ def itemGuide():
     for line in lines:
         typing(line)
 
-# GAME SHIT
+# ACTUAL GAME SHIT
 
 def preGame(game):
     game.liveShells = random.randint(1, 4)
@@ -268,7 +268,7 @@ def preGame(game):
 def menu(game):
     game.reset_lives()
     time.sleep(0.5)
-    typing("-----------------\nBUCKSHOT ROULETTE\n-----------------")
+    typing("-----------------\nFAKESHOT ROULETTE\n-----------------")
     time.sleep(0.5)
     typing(f"You have {game.wins} win(s).")
     typing("Use [start] to begin or [info] for more info...")

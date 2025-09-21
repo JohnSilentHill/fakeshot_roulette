@@ -1,5 +1,13 @@
 import os, json, sys, time, random
 
+logoText = """
+ _____ _____ _____ _____ _____ _____ _____ _____    _____ _____ _____ __    _____ _____ _____ _____ 
+|   __|  _  |  |  |   __|   __|  |  |     |_   _|  | __  |     |  |  |  |  |   __|_   _|_   _|   __|
+|   __|     |    -|   __|__   |     |  |  | | |    |    -|  |  |  |  |  |__|   __| | |   | | |   __|
+|__|  |__|__|__|__|_____|_____|__|__|_____| |_|    |__|__|_____|_____|_____|_____| |_|   |_| |_____|
+
+"""
+
 # SAVING
 
 save_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "savegame.json")
@@ -7,6 +15,7 @@ save_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "savegame.j
 def save_game(game):
     savegame = {
         "wins": game.wins,
+        "money": game.money
     }
 
     save_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "savegame.json")
@@ -22,9 +31,17 @@ def typing(text, delay=0.025):
         time.sleep(delay)
     print()
 
+def typingFast(text, delay=0.0125):
+    for character in text:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
 # GAME STATES
 class GameState:
     def __init__(self):
+        self.money = 0
         self.playerLives = 3
         self.aiLives = 3
         self.isSawed = False
@@ -84,14 +101,14 @@ def magnifying_glass(game):
     yourTurn(game)
 
 def handcuffs(game):
-    typing("You pass your opponent the handcuffs. They pass the next turn.") # What a sucker
+    typing("\nYou give your opponent the handcuffs. They pass the next turn.") # What a sucker
     game.aiSkipTurn = True
     if handcuffs in game.playerItems:
         game.playerItems.remove(handcuffs)
     yourTurn(game)
 
 def cigarettes(game):
-    typing("You smoke a cigarette...")
+    typing("\nYou smoke a cigarette...")
     if game.playerLives == 3:
         typing("Max health already.")
     else:
@@ -102,26 +119,29 @@ def cigarettes(game):
     yourTurn(game)
 
 def phone(game):
-    typing("You pick up your burner phone..."), time.sleep(1)
+    typing("\nYou pick up your burner phone..."), time.sleep(1)
     # typing("'Shell {shellnum}, {shelltype}.") # E.g: 'Shell 4, blank.'
     if phone in game.playerItems:
         game.playerItems.remove(phone)
     yourTurn(game)
 
 def medicine(game):
-    typing("You take a pill...")
+    typing("\nYou take a pill...")
+    time.sleep(1)
     medicineResult = random.randint(0,1)
     if medicineResult == 1:
         if game.playerLives == 1:
-            typing("+2 lives.")
+            typing("Success... +2 lives.")
             game.playerLives += 2
         elif game.playerLives ==2:
-            typing("+1 life.")
+            typing("Success... +1 life.")
             game.playerLives += 1
         else:
-            typing("Max health already.")
+            typing("Success... Max health already.")
     else:
         typing("It was expired. -1 life.")
+    
+    yourTurn(game)
 
 # SHOOTING
 
@@ -132,7 +152,7 @@ def shootSelf(game):
     shell = game.shellPool.pop(0) # Selects the first shell in the sequence
 
     if shell == 'live':
-        typing("You point the barrel at yourself..."), time.sleep(1), typing("BANG.")
+        typing("You point the barrel at yourself...\n"), time.sleep(1), typing("BANG."), time.sleep(1) # LIVE
         if game.isSawed:
             typing("\nSawed-off barrel deals double damage...\n-2 lives") # Rough
             game.playerLives -= 2
@@ -141,7 +161,7 @@ def shootSelf(game):
             game.playerLives -= 1
         game.liveShells -= 1
     else:
-        typing("Blank.")
+        typing("You point the barrel at yourself...\n"), time.sleep(1), typing("Blank."), time.sleep(1) # BLANK
         game.blankShells -= 1
 
     if game.isSawed:
@@ -157,8 +177,6 @@ def shootSelf(game):
     else:
         aiTurn(game)
 
-
-
 def shootAI(game):
     if checkShells(game):
         return
@@ -166,7 +184,7 @@ def shootAI(game):
     shell = game.shellPool.pop(0)
 
     if shell == 'live':
-        typing("\nYou aim at the AI..."), time.sleep(1), typing("BANG.")
+        typing("\nYou point the barrel at the AI...\n"), time.sleep(1), typing("BANG."), time.sleep(1) # LIVE
         if game.isSawed:
             typing("\nSawed-off barrel deals double damage.\n-2 AI lives.") # Good call dude
             game.aiLives -= 2
@@ -175,7 +193,7 @@ def shootAI(game):
             game.aiLives -= 1
         game.liveShells -= 1
     else:
-        typing("\nBlank.")
+        typing("\nYou point the barrel at the AI...\n"), time.sleep(1), typing("Blank."), time.sleep(1) # BLANK
         game.blankShells -= 1
 
     if game.isSawed:
@@ -199,8 +217,9 @@ def yourTurn(game):
         return
 
     time.sleep(0.5)
-    typing("\nYOUR TURN\n")
+    typing("\n----- YOUR TURN -----\n")
     time.sleep(0.5)
+    typing(f"You: {game.playerLives} lives, AI: {game.aiLives} lives.\n")
 
     typing("Inventory:")
     itemsDisplay = ", ".join(item.__name__ for item in game.playerItems)
@@ -237,18 +256,18 @@ def aiTurn(game):
         return
 
     time.sleep(0.5)
-    typing("\nAI'S TURN.")
+    typing("\n----- AI'S TURN -----")
 
     shell = game.shellPool.pop(0)
 
     if shell == 'live':
-        typing("\nThe AI aims at you..."), time.sleep(1), typing("BANG.")
+        typing("\nThe AI points the barrel at you...\n"), time.sleep(1), typing("BANG."), time.sleep(1) # LIVE
         typing("-1 life.")
         game.playerLives -= 1
         game.liveShells -= 1
         game.isSawed = False
     else:
-        typing("\nThe AI aims at you..."), time.sleep(1), typing("BLANK.")
+        typing("\nThe AI points the barrel at you...\n"), time.sleep(1), typing("BLANK."), time.sleep(1) # BLANK
         game.blankShells -= 1
         game.isSawed = False
 
@@ -263,19 +282,15 @@ def aiTurn(game):
 
 def checkShells(game):
     if not game.shellPool:
-        typing("\nNo shells left.")
-        if game.playerLives > game.aiLives:
-            typing("You win by having more lives!")
-        elif game.aiLives > game.playerLives:
-            typing("AI wins by having more lives.")
-        else:
-            typing("It's a draw.")
-        menu(game)
-        return True
-    return False
+        typing("\nNo shells left\nReloading shotgun..."), time.sleep(1), typing("\nDone.")
+        time.sleep(1)
+        preGame(game)
 
 def win(game):
-    typing("You survived.")
+    global money
+    typing("\nYou beat the AI.\n"), time.sleep(0.5), typing("Your winnings:"), time.sleep(0.5)
+    typing("$2000")
+    game.money += 2000
     game.wins += 1
     menu(game)
 
@@ -286,7 +301,7 @@ def dead():
 # DISPLAY
 
 def shellDisplay(game): # Displays on each turn
-    typing(f"\n{game.liveShells} live shell(s), {game.blankShells} blank shell(s)") 
+    typing(f"\n{game.liveShells} live, {game.blankShells} blank.") 
 
 def itemGuide(): # Only for use on the menu
     lines = [
@@ -317,9 +332,10 @@ def preGame(game):
     yourTurn(game)
 
 def menu(game):
+    global logoText
     game.reset_lives()
     time.sleep(0.5)
-    typing("-----------------\nFAKESHOT ROULETTE\n-----------------")
+    print(logoText)
     time.sleep(0.5)
     typing(f"You have {game.wins} win(s).")
     typing("Use [start], [info], or [quit] to save and quit...")

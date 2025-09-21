@@ -4,5 +4,5 @@
 
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika.
 
-I do not claim to have invented this as all credit goes to Mike Klubnika for his original work. <br/>
-You can view his other projects on his website at [https://mikeklubnika.com/](https://mikeklubnika.com/)
+*I do not claim to have invented this as all credit goes to Mike Klubnika for his original work. <br/>*
+*You can view his other projects on his website at [https://mikeklubnika.com/](https://mikeklubnika.com/)*

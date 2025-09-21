@@ -3,13 +3,14 @@
 # General Info
 
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <br/>
-It should contain the .py file and a .json save file.
 
-> All save data is 0 by default but fully modifiable by editing the `savegame.json` file (use Notepad++ or VS Code if unsure).
+You can use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette_Wik) or the 'info' command in-game for help.
 
- - For debug, you can use the `debug` command when it is **your turn** after starting the game. This isn't accessible on the main menu because it frankly has no use there.
+### Boring things
 
-This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
+- For debug, you can use the `debug` command when it is **your turn** after starting the game. This isn't accessible on the main menu because it frankly has no use there.
+- > All save data is 0 by default but fully modifiable by editing the `savegame.json` file under the parent directory (use Notepad++ or VS Code if unsure).
+- This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look. <br/>
 
 You can also use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette_Wik) or the 'info' command in-game for help.

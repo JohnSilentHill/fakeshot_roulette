@@ -3,13 +3,13 @@
 # General Info
 
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <br/>
-This project is highly WIP and you can view the roadmap below to get a general idea as to what is currently implemented and what is yet to come.
 
-Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look.
+IMPORTANT: There are currently 2 save files within each release. One is a blank, fresh save, and the other starts with 10,000 money and 100 wins by default. As of right now, these files do nothing, but they are here for when save files are fully implemented in the future.
 
-### Disclaimer
+This project is highly WIP and you can view the roadmap below to get a general idea as to what is currently implemented and what is yet to come. <br/>
+Also Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look.
 
-*I do not claim to have invented this as all credit goes to Mike Klubnika for his original work. <br/>*
+*Disclaimer: I do not claim to have invented this as all credit goes to Mike Klubnika for his original work. <br/>*
 *You can view his other projects on his website at [https://mikeklubnika.com/](https://mikeklubnika.com/)*
 
 # Roadmap
@@ -22,12 +22,13 @@ Feel free to fork and create pull requests as you please. If you are more experi
 
 ### Upcoming
 
+- [ ] Save file reading
+- [ ] Debug mode
 - [ ] More items to match original roster
 - [ ] Different rounds to mimic original game
 - [ ] Intelligent AI -- I will literally just make it so it judges whether or not to shoot.
 - [ ] Difficulties
-- [ ] Debug mode
-- [ ] Better text output for a more visually appealing experience
 - [ ] Money
-- [ ] Save files
+- [ ] Better text output for a more visually appealing experience
+
 

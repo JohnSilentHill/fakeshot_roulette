@@ -9,7 +9,7 @@ This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <b
 
 ------
 
-This project is highly WIP and you can view the roadmap below to get a general idea as to what is currently implemented and what is yet to come. <br/>
+This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look.
 
 ------

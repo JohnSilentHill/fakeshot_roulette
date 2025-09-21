@@ -4,7 +4,8 @@
 
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <br/>
 
-IMPORTANT: There are currently 2 save files within each release. One is a fresh save, and the other starts with 10,000 money and 100 wins by default. Choose 1 file and delete the other, or alternatively delete one and edit the .json file to your liking. (As of right now, these files do nothing, but they are here for when save files are fully implemented in the future)
+IMPORTANT: There are currently 2 save files within each release. One is a fresh save, and the other starts with 10,000 money and 100 wins by default. <br/>
+Choose 1 file and delete the other, or alternatively delete one and edit the .json file to your liking.
 
 ------
 

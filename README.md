@@ -3,7 +3,9 @@
 # General Info
 
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <br/>
-It is highly WIP and you can view the roadmap below.
+This project is highly WIP and you can view the roadmap below to get a general idea as to what is currently implemented and what is yet to come.
+
+Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look.
 
 ### Disclaimer
 
@@ -12,4 +14,20 @@ It is highly WIP and you can view the roadmap below.
 
 # Roadmap
 
+### Completed
+
+[x] Main game loop
+[x] Basic usage of items
+[x] Optimisation using gamestates
+
+### Upcoming
+
+[ ] More items to match original roster
+[ ] Different rounds to mimic original game
+[ ] Intelligent AI -- I will literally just make it so it judges whether or not to shoot.
+[ ] Difficulties
+[ ] Debug mode
+[ ] Better text output for a more visually appealing experience
+[ ] Money
+[ ] Save files
 

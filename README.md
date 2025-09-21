@@ -2,8 +2,6 @@
 
 # General Info
 
-You can read up on the game on the [wiki](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette_Wik) or use the 'info' command in-game.
-
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <br/>
 It should contain the .py file and a .json save file.
 
@@ -11,6 +9,8 @@ It should contain the .py file and a .json save file.
 
 This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look. <br/>
+
+You can also use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette_Wik) or use the 'info' command in-game for help.
 
 ------
 

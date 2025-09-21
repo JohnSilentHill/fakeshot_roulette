@@ -141,7 +141,16 @@ def handcuffs(game):
         game.playerItems.remove(handcuffs)
     yourTurn(game)
 
+def fivehundredcigarettes(game):
+    global money
+    typing("\nFive Hundred Cigarettes.")
+    typing("\nYou gain $500")
+    game.money += 500
+
 def cigarettes(game):
+    roll500 = random.randint(1,100)
+    if roll500 == "1":
+        fivehundredcigarettes()
     typing("\nYou smoke a cigarette...")
     if game.playerLives == 3:
         typing("Max health already.")

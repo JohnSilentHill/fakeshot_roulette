@@ -24,7 +24,7 @@ Feel free to fork and create pull requests as you please. If you are more experi
 - [x] Main game loop
 - [x] Basic usage of items
 - [x] Optimisation using gamestates
-- [ ] Save file reading/loading
+- [x] Save file reading/loading // I think
 
 ### Upcoming
 

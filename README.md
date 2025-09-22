@@ -19,7 +19,7 @@ Feel free to fork and create pull requests as you please. If you are more experi
 
 ------
 
-*Disclaimer: I have not invented the original game nor do I claim ownership of any copyright associated. All credit goes to [Mike Klubnika](https://mikeklubnika.com/). <br/>*
+*Disclaimer: This is a remake of the original title, which I did not make. All credit goes to [Mike Klubnika](https://mikeklubnika.com/). <br/>*
 
 ------
 

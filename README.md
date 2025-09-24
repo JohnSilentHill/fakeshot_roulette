@@ -10,7 +10,7 @@ You can use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Bucksh
 
 ### Boring things
 
-- For debug, you can use the `debug` command when it is **your turn** after starting the game. This isn't accessible on the main menu because it frankly has no use there.
+- For debug, you can use the `debug` command when it is **your turn** after starting the game. This isn't accessible on the main menu because it displays information regarding the current gamestate. I'm not sure it would have any use elsewhere.
 - This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look. <br/>
 - Your save is blank by default, with no wins or money. You can simply play the game or edit your save manually to fix this glaring issue.
@@ -19,7 +19,7 @@ Feel free to fork and create pull requests as you please. If you are more experi
 
 ------
 
-*Disclaimer: I have not invented the original game nor do I claim ownership of any copyright associated. All credit goes to [Mike Klubnika](https://mikeklubnika.com/). <br/>*
+*Disclaimer: This is a remake of the original title Buckshot Roulette. For that, all credit goes to [Mike Klubnika](https://mikeklubnika.com/). <br/>*
 
 ------
 

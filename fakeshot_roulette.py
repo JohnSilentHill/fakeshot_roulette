@@ -187,8 +187,8 @@ def medicine(game): # -----> MEDICINE
 # SHOOTING
 
 def shootSelf(game):
-    if checkShells(game):
-        return
+
+    checkShells(game)
 
     shell = game.shellPool.pop(0) # Selects the first shell in the sequence
 
@@ -219,8 +219,8 @@ def shootSelf(game):
         aiTurn(game)
 
 def shootAI(game):
-    if checkShells(game):
-        return
+    
+    checkShells(game)
 
     shell = game.shellPool.pop(0)
 
@@ -254,8 +254,7 @@ def yourTurn(game): # YOUR TURN
         win(game)
         return
 
-    if checkShells(game):
-        return
+    checkShells(game)
 
     time.sleep(0.5)
     typing("\n----- YOUR TURN -----\n")
@@ -295,8 +294,7 @@ def aiTurn(game): # AI TURN
         yourTurn(game)
         return
 
-    if checkShells(game):
-        return
+    checkShells(game)
 
     time.sleep(0.5)
     typing("\n----- AI'S TURN -----")

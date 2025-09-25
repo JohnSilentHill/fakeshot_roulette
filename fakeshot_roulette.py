@@ -42,26 +42,26 @@ def typingFast(text, delay=0.0125):
 # GAME STATES
 
 class GameState:
-    def __init__(self):
-        self.money = 0
-        self.playerLives = 3
-        self.aiLives = 3
-        self.isSawed = False
-        self.aiHandcuffed = False
-        self.playerHandcuffed = False
-        self.wins = 0
-        self.liveShells = 0
-        self.blankShells = 0
-        self.shellPool = []
-        self.playerItems = []
+    def __init__(state):
+        state.money = 0
+        state.playerLives = 3
+        state.aiLives = 3
+        state.isSawed = False
+        state.aiHandcuffed = False
+        state.playerHandcuffed = False
+        state.wins = 0
+        state.liveShells = 0
+        state.blankShells = 0
+        state.shellPool = []
+        state.playerItems = []
 
-    def reset_lives(self):
-        self.playerLives = 3
-        self.aiLives = 3
+    def reset_lives(state):
+        state.playerLives = 3
+        state.aiLives = 3
 
-    def cap_lives(self):
-        self.playerLives = min(self.playerLives, 3)
-        self.aiLives = min(self.aiLives, 3)
+    def cap_lives(state):
+        state.playerLives = min(state.playerLives, 3)
+        state.aiLives = min(state.aiLives, 3)
 
 # DEBUG
 

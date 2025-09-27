@@ -43,6 +43,7 @@ As a placeholder, I might make it work like this:
 1. If you played 4 rounds (reloads), had 2 rounds above 2HP, got 7 correct shells, and 2 incorrect it returns:
  
 `moneyGain = ((4 * 2 * 7) / 2) * 100` = $2800
+
 2. If you played 2 rounds, had 1 round above 2HP, got 5 correct shells, and 4 incorrect it returns:
 
 `moneyGain = ((2 * 1 * 5) / 4) * 100` = $250

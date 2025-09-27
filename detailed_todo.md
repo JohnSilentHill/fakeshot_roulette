@@ -37,6 +37,7 @@ Obviously there is much more logic that goes into using an item. For example, th
 This should be dynamic according to the number of rounds played and something else like times near death. I don't know how it works for the original game so maybe I'll need to look into that.
 
 As a placeholder, I might make it work like this:
+
 `moneyGain = ((rounds * roundsAbove2HP * correctShells) / incorrectShells)`
 
 1. If you played 4 rounds (reloads), had 2 rounds above 2HP, got 7 correct shells, and 2 incorrect it returns:

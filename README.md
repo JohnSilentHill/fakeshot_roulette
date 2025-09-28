@@ -24,6 +24,8 @@ Feel free to fork and create pull requests as you please. If you are more experi
 ------
 
 # Roadmap
+For a more detailed version of this, see the file `detailed_todo.md`.
+
 
 ### Completed
 

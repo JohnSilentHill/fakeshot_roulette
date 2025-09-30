@@ -342,7 +342,7 @@ def dead():
 # DISPLAY
 
 def shellDisplay(game): # Displays on each turn
-    typing(f"\n{game.liveShells} live, {game.blankShells} blank.") 
+    typing(f"\n{game.liveShells} LIVE. {game.blankShells} BLANK.") 
 
 def itemGuide(): # Only for use on the menu
     lines = [

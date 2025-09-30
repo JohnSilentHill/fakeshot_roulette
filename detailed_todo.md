@@ -57,4 +57,11 @@ You are compensated quite well for playing a good game with little mistakes.
 As for what you do with this money... nothing. It's sort of useless in Buckshot Roulette but there is a double or nothing mode where new items are added. 
 
 As of now, I don't plan on changing the item pool based on if it's double or nothing, but this may come later down the line once the main game is 100% complete.
-        
+
+## 3. Misc Items
+
+### Inverter
+
+This is kind of difficult actually. I'm having trouble syncing the changed polarity with the yourTurn function since they're disconnected.
+
+I might have to make the shell generation a global function rather than a local function each time the preGame function is called.

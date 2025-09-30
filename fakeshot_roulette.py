@@ -44,12 +44,13 @@ def typingFast(text, delay=0.0125):
 class GameState:
     def __init__(state):
         state.money = 0
+        state.rounds = 0
+        state.wins = 0
         state.playerLives = 3
         state.aiLives = 3
         state.isSawed = False
         state.aiHandcuffed = False
         state.playerHandcuffed = False
-        state.wins = 0
         state.liveShells = 0
         state.blankShells = 0
         state.shellPool = []
@@ -184,6 +185,11 @@ def medicine(game): # -----> MEDICINE
     
     yourTurn(game)
 
+def inverter(game): # -----> INVERTER
+    typing("You invert the polarity of the shell...")
+    
+    yourTurn(game)
+
 # SHOOTING
 
 def shootSelf(game):
@@ -212,7 +218,7 @@ def shootSelf(game):
     game.cap_lives()
 
     if game.playerLives <= 0:
-        dead()
+        dead(game)
     elif shell == 'blank':
         yourTurn(game) 
     else:
@@ -259,9 +265,9 @@ def yourTurn(game): # YOUR TURN
     time.sleep(0.5)
     typing("\n----- YOUR TURN -----\n")
     time.sleep(0.5)
-    typing(f"You: {game.playerLives} lives, AI: {game.aiLives} lives.\n")
+    typing(f"YOU: {game.playerLives} LIVES. AI: {game.aiLives} LIVES.\n")
 
-    typing("Inventory:")
+    typing("INVENTORY:")
     itemsDisplay = ", ".join(item.__name__ for item in game.playerItems)
     typing(itemsDisplay)
 
@@ -315,7 +321,7 @@ def aiTurn(game): # AI TURN
     game.cap_lives()
 
     if game.playerLives <= 0:
-        dead()
+        dead(game)
     else:
         yourTurn(game)
 
@@ -323,7 +329,7 @@ def aiTurn(game): # AI TURN
 
 def checkShells(game):
     if not game.shellPool:
-        typing("\nNo shells left\nReloading shotgun..."), time.sleep(1), typing("\nDone.")
+        typing("\nNO SHELLS LEFT\nRELOADING IN A RANDOM ORDER..."), time.sleep(1), typing("\nDone.")
         time.sleep(1)
         preGame(game)
 
@@ -333,10 +339,12 @@ def win(game):
     typing("$2000")
     game.money += 2000
     game.wins += 1
+    game.rounds += 1
     menu(game)
 
-def dead():
+def dead(game):
     typing("You died. Exiting...")
+    game.rounds == 0
     quit()
 
 # DISPLAY
@@ -352,7 +360,8 @@ def itemGuide(): # Only for use on the menu
         "HANDCUFFS:          Wearer skips their next turn.",
         "CIGARETTES:         Restores 1 health.",
         "PHONE:              Reveals info about a random shell.",
-        "MEDICINE:           If normal: restores 2 lives, if expired: removes 1 life."
+        "MEDICINE:           If normal: restores 2 lives, if expired: removes 1 life.",
+        "INVERTER:           Changes the type of round currently chambered."
     ]
     for line in lines:
         typing(line)
@@ -365,7 +374,7 @@ def preGame(game):
     game.shellPool = ['live'] * game.liveShells + ['blank'] * game.blankShells
     random.shuffle(game.shellPool)
 
-    all_items = [beer, saw, magnifying_glass, handcuffs, cigarettes, phone, medicine]
+    all_items = [beer, saw, magnifying_glass, handcuffs, cigarettes, phone, medicine, inverter]
     game.playerItems = random.sample(all_items, 3)
 
     game.reset_lives()

@@ -69,6 +69,7 @@ class GameState:
 def debug(game):
 
     itemsDisplay = ", ".join(item.__name__ for item in game.playerItems)
+    shell = game.shellPool.pop(0)
 
     debugOutput = [
         "",
@@ -83,6 +84,7 @@ def debug(game):
         f"aiHandcuffed?:     {game.aiHandcuffed}",
         f"liveShells:        {game.liveShells}",
         f"liveShells:        {game.blankShells}",
+        f"currentShell:      {shell}",
         f"shellPool:         {game.shellPool}",
         f"playerItems:       [{itemsDisplay}]"
     ]
@@ -186,8 +188,16 @@ def medicine(game): # -----> MEDICINE
     yourTurn(game)
 
 def inverter(game): # -----> INVERTER
-    typing("You invert the polarity of the shell...")
+    chambered = game.shellPool[0]
+
+    typing("\nYou invert the polarity of the shell...")
     
+    if chambered == 'live':
+        chambered == 'blank'
+
+    else:
+        chambered == 'live' # THIS DOESNT WORK LOL
+
     yourTurn(game)
 
 # SHOOTING

@@ -19,10 +19,10 @@ Feel free to fork and create pull requests as you please. If you are more experi
 
 ------
 
-*Disclaimer: This is a remake of the original title Buckshot Roulette. For that, all credit goes to [Mike Klubnika](https://mikeklubnika.com/).
+*Disclaimer: This is a remake of the original title Buckshot Roulette. For that, all credit goes to [Mike Klubnika](https://mikeklubnika.com/).*
 
-The main soundtrack was sourced from the game files as I do own it on steam, however all the other sfx that aren't publically accessible were downloaded from royalty free libraries.
-<br/>*
+*The main soundtrack was sourced from the game files as I do own it on steam, however all the other sfx that aren't publically accessible were downloaded from royalty free libraries.*
+<br/>
 
 ------
 

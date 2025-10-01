@@ -266,7 +266,7 @@ def shootAI(game):
             game.aiLives -= 1
         game.liveShells -= 1
     else:
-        typing("\nYou point the barrel at the AI...\n"), time.sleep(1), typing("Blank."), time.sleep(1)  # BLANK
+        typing("\nYou point the barrel at the AI...\n"), time.sleep(1) # BLANK
         play_sound("shot_blank")  
         game.blankShells -= 1
 
@@ -336,13 +336,18 @@ def aiTurn(game): # AI TURN
     shell = game.shellPool.pop(0)
 
     if shell == 'live':
-        typing("\nThe AI points the barrel at you...\n"), time.sleep(1), typing("BANG."), time.sleep(1) # LIVE
+        typing("\nThe AI points the barrel at you...\n"), time.sleep(1)
+        play_sound("shot_live")  # LIVE
         typing("-1 life.")
         game.playerLives -= 1
         game.liveShells -= 1
         game.isSawed = False
+
+        if game.playerLives == 1:
+            typing("\nCAREFUL NOW...")
     else:
-        typing("\nThe AI points the barrel at you...\n"), time.sleep(1), typing("BLANK."), time.sleep(1) # BLANK
+        typing("\nThe AI points the barrel at you...\n"), time.sleep(1) # BLANK
+        play_sound("shot_blank")
         game.blankShells -= 1
         game.isSawed = False
 
@@ -396,7 +401,7 @@ def itemGuide(): # Only for use on the menu
 
 # ACTUAL GAME STUFF
 
-def preGame(game):
+def preGame(game): # This is only for functions, not any text output
     game.liveShells = random.randint(1, 4)
     game.blankShells = random.randint(1, 4)
     game.shellPool = ['live'] * game.liveShells + ['blank'] * game.blankShells

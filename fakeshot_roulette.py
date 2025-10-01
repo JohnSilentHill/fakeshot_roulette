@@ -1,4 +1,6 @@
-import os, json, sys, time, random, msvcrt
+import pygame, os, json, sys, time, random, msvcrt
+
+pygame.mixer.init()
 
 logoText = """
  _____ _____ _____ _____ _____ _____ _____ _____    _____ _____ _____ __    _____ _____ _____ _____ 
@@ -38,6 +40,18 @@ def typingFast(text, delay=0.0125):
         sys.stdout.flush()
         time.sleep(delay)
     print()
+
+# SOUNDS
+
+def play_sound(sound_name):
+    base_dir = os.path.dirname(os.path.abspath(__file__)) 
+    sound_path = os.path.join(base_dir, "sounds", f"{sound_name}.mp3")  
+
+    if os.path.exists(sound_path):
+        sound = pygame.mixer.Sound(sound_path)
+        sound.play()
+    else:
+        print(f"Sound file {sound_name}.mp3 not found at {sound_path}")
 
 # GAME STATES
 
@@ -127,7 +141,7 @@ def saw(game): # -----> SAW
 def magnifying_glass(game):
     typing("\nYou check the chamber...")
     if not game.shellPool:
-        typing("The chamber is empty.") # This shouldn't happen, but it's here in case something goes horribly wrong
+        typing("The chamber is empty.") # This is here in case something goes horribly wrong
     else:
         chambered = game.shellPool[0]
         typing(f"The next shell is a {chambered.upper()}.")
@@ -193,36 +207,38 @@ def inverter(game): # -----> INVERTER
     typing("\nYou invert the polarity of the shell...")
     
     if chambered == 'live':
-        chambered == 'blank'
-
+        game.shellPool[0] = 'blank' 
     else:
-        chambered == 'live' # THIS DOESNT WORK LOL
+        game.shellPool[0] = 'live' 
 
     yourTurn(game)
 
 # SHOOTING
 
 def shootSelf(game):
-
     checkShells(game)
 
-    shell = game.shellPool.pop(0) # Selects the first shell in the sequence
+    shell = game.shellPool.pop(0) 
 
     if shell == 'live':
-        typing("You point the barrel at yourself...\n"), time.sleep(1), typing("BANG."), time.sleep(1) # LIVE
+        typing("You point the barrel at yourself...\n"), time.sleep(1) # LIVE
+        play_sound("live_self")  
         if game.isSawed:
-            typing("\nSawed-off barrel deals double damage...\n-2 lives") # Rough
+            typing("\nSawed-off barrel deals double damage...\n-2 lives")  # Rough
             game.playerLives -= 2
         else:
             typing("-1 life.")
             game.playerLives -= 1
         game.liveShells -= 1
     else:
-        typing("You point the barrel at yourself...\n"), time.sleep(1), typing("Blank."), time.sleep(1) # BLANK
+        typing("You point the barrel at yourself...\n"), time.sleep(1) # BLANK
+        play_sound("shot_blank")
         game.blankShells -= 1
 
+    time.sleep(1.5), play_sound("rack") 
+
     if game.isSawed:
-        typing("Barrel restored to default.") # The barrel is restored to default regardless of shell outcome
+        typing("Barrel restored to default.")  # The barrel is restored to default regardless of shell outcome
         game.isSawed = False
 
     game.cap_lives()
@@ -230,28 +246,31 @@ def shootSelf(game):
     if game.playerLives <= 0:
         dead(game)
     elif shell == 'blank':
-        yourTurn(game) 
+        yourTurn(game)
     else:
         aiTurn(game)
 
 def shootAI(game):
-    
     checkShells(game)
 
     shell = game.shellPool.pop(0)
 
     if shell == 'live':
-        typing("\nYou point the barrel at the AI...\n"), time.sleep(1), typing("BANG."), time.sleep(1) # LIVE
+        typing("\nYou point the barrel at the AI...\n"), time.sleep(1) # LIVE
+        play_sound("live_ai") 
         if game.isSawed:
-            typing("\nSawed-off barrel deals double damage.\n-2 AI lives.") # Good call dude
+            typing("\nSawed-off barrel deals double damage.\n-2 AI lives.")  # Good call dude
             game.aiLives -= 2
         else:
             typing("\n-1 AI life.")
             game.aiLives -= 1
         game.liveShells -= 1
     else:
-        typing("\nYou point the barrel at the AI...\n"), time.sleep(1), typing("Blank."), time.sleep(1) # BLANK
+        typing("\nYou point the barrel at the AI...\n"), time.sleep(1), typing("Blank."), time.sleep(1)  # BLANK
+        play_sound("shot_blank")  
         game.blankShells -= 1
+
+    time.sleep(1.5), play_sound("rack") 
 
     if game.isSawed:
         typing("Barrel restored to default.")
@@ -263,7 +282,6 @@ def shootAI(game):
         win(game)
     else:
         aiTurn(game)
-
 
 def yourTurn(game): # YOUR TURN
     if game.aiLives <= 0:

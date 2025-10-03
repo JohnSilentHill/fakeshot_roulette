@@ -50,8 +50,6 @@ In-game:
 
 # Boring things
 
-- For debug, you can use the `debug` command when it is **your turn** after starting the game. This isn't accessible on the main menu because it displays information regarding the current gamestate. I'm not sure it would have any use elsewhere.
-  
 - This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look. <br/>
 

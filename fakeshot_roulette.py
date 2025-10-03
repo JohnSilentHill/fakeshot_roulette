@@ -1,12 +1,21 @@
 import pygame, os, json, sys, time, random, msvcrt
 
 pygame.mixer.init()
+typing_channel = pygame.mixer.Channel(1)  # Use channel 5 (or any number 0–7)
 
 logoText = """
  _____ _____ _____ _____ _____ _____ _____ _____    _____ _____ _____ __    _____ _____ _____ _____ 
 |   __|  _  |  |  |   __|   __|  |  |     |_   _|  | __  |     |  |  |  |  |   __|_   _|_   _|   __|
 |   __|     |    -|   __|__   |     |  |  | | |    |    -|  |  |  |  |  |__|   __| | |   | | |   __|
 |__|  |__|__|__|__|_____|_____|__|__|_____| |_|    |__|__|_____|_____|_____|_____| |_|   |_| |_____|
+"""
+
+infoTitle1 = """
+ＨＯＷ  ＴＯ  ＰＬＡＹ
+"""
+
+infoTitle2 = """
+ＩＴＥＭ  ＧＵＩＤＥ
 """
 
 save_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "savegame.json")
@@ -22,20 +31,22 @@ def save_game(game):
     typing("Game saved.")
 
 def typing(text, delay=0.025):
+    play_typing_sound()
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
         time.sleep(delay)
-        play_sound("text_output")
     print()
+    stop_typing_sound()
 
 def typingFast(text, delay=0.0125):
+    play_typing_sound()
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
         time.sleep(delay)
-        play_sound("text_output")
     print()
+    stop_typing_sound()
 
 def play_sound(sound_name):
     base_dir = os.path.dirname(os.path.abspath(__file__)) 
@@ -45,6 +56,18 @@ def play_sound(sound_name):
         sound.play()
     else:
         print(f"Sound file {sound_name}.mp3 not found at {sound_path}")
+
+def play_typing_sound():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    sound_path = os.path.join(base_dir, "sounds", "typing.mp3")
+    if os.path.exists(sound_path):
+        sound = pygame.mixer.Sound(sound_path)
+        typing_channel.play(sound, loops=-1)
+    else:
+        print(f"Typing sound not found at {sound_path}")
+
+def stop_typing_sound():
+    typing_channel.fadeout(1)
 
 def play_bgm(filename):
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -112,8 +135,8 @@ def debug(game):
     ]
     for line in debugOutput:
         typingFast(line)
-    typingFast("\nPress any key to resume...")
-    msvcrt.getch()
+    time.sleep(2), play_sound("click1"), print("\nPress any key to resume...")
+    msvcrt.getch(), play_sound("click2"), time.sleep(0.5)
     yourTurn(game)
 
 def beer(game):
@@ -365,7 +388,20 @@ def dead(game):
 def shellDisplay(game):
     typing(f"\n{game.liveShells} LIVE. {game.blankShells} BLANK.") 
 
-def itemGuide():
+def playGuide():
+    lines = [
+        "A random amount of shells are placed in the shotgun in a random order.",
+        "To win, you must shoot your opponent with live rounds enough times so they run out of health.",
+        "",
+        "You can shoot yourself too. If it is a blank shell you play again, else it is your opponent's go.",
+        "You must use your items and your own smarts to determine what type of shell is chambered, and shoot accordingly.",
+        "",
+        "Good luck."
+    ]
+    for line in lines:
+        print(line)
+
+def itemGuide(game):
     lines = [
         "BEER:               Ejects 1 shell from the chamber.",
         "SAW:                Saws off the barrel, doubling damage for next shot.",
@@ -377,7 +413,11 @@ def itemGuide():
         "INVERTER:           Changes the type of round currently chambered."
     ]
     for line in lines:
-        typing(line)
+        print(line)
+
+    time.sleep(2), play_sound("click1"), print("\nPress any key to resume...")
+    msvcrt.getch()
+    menu(game)
 
 def preGame(game):
     game.liveShells = random.randint(1, 4)
@@ -401,15 +441,16 @@ def menu(game):
     typing("Use [start], [info], or [quit] to save and quit...")
     menuInput = input("> ").strip().lower()
     if menuInput == "start":
-        pause_bgm()
-        preGame(game)
+        pause_bgm(), play_sound("start")
+        time.sleep(1), preGame(game)
     elif menuInput == "info":
-        pause_bgm()
-        typing("-----------------\nINFO\n-----------------")
-        itemGuide()
+        pause_bgm(), play_sound("crt_sfx"), time.sleep(0.25)
+        print("Loading info...\n"), time.sleep(1.6)
+        play_sound("click2"), print(infoTitle1), playGuide(), time.sleep(1)
+        play_sound("click2"), print(infoTitle2), itemGuide(game)
         return menu(game)
     elif menuInput == "quit":
-        pause_bgm()
+        pause_bgm(), play_sound("select")
         save_game(game)
         typing("\nExiting...")
         quit()

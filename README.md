@@ -28,7 +28,7 @@ Imagine Russian Roulette but with a shotgun and a random amount of shells. A liv
 You have the choice of shooting yourself, your opponent, or using an item to your advantage.<br/>
 If a live shell is shot at you, regardless of who fired it, it becomes your opponent's turn. This rule applies to them too.
 
-The full list of items and their uses can be viewed in game and for the sake of conciseness, can also be found on the [wiki](https://buckshot-roulette.fandom.com/wiki/Category:Items) rather than here.
+The full list of items and their uses can be viewed in game and for the sake of conciseness, can also be found [here.](https://buckshot-roulette.fandom.com/wiki/Category:Items)
 
 You win if your opponent runs out of lives whether that be by your hand or their own.
 

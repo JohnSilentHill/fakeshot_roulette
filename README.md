@@ -3,7 +3,7 @@
 # CONTENTS
 
 - [General Info](#general-info)
-- [Boring Things](###boring-things)
+- [Boring Things](#boring-things)
 - [Roadmap](#roadmap)
 
 # General Info
@@ -14,7 +14,7 @@ Currently, there are *most* of the items from the original game bar a few multip
 
 You can use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette_Wiki) or the 'info' command in-game for help.
 
-### Boring things
+# Boring things
 
 - For debug, you can use the `debug` command when it is **your turn** after starting the game. This isn't accessible on the main menu because it displays information regarding the current gamestate. I'm not sure it would have any use elsewhere.
 - This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>

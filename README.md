@@ -1,9 +1,11 @@
 <img width="1200" height="240" alt="github-header-banner(5)" src="https://github.com/user-attachments/assets/eb6ded4b-bb4a-44b8-ae63-b764a4d758fd" />
 
-# CONTENTS
+# Contents
 
 - [Overview](#overview)
-- [How top play](#how-to-play)
+- [How to play](#how-to-play)
+  - [Gameplay Loop](##gameplay-loop)
+  - [Commands](##commands)
 - [Boring Things](#boring-things)
 - [Roadmap](#roadmap)
 
@@ -17,12 +19,16 @@ You can use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Bucksh
 
 # How to play
 
+### Gameplay Loop
+
 Imagine Russian Roulette but with a shotgun and a random amount of shells. A live shell deals damage, and a blank does not.
 
 You have the choice of shooting yourself, your opponent, or using an item to your advantage.<br/>
 If a live shell is shot at you, regardless of who fired it, it becomes your opponent's turn. This rule applies to them too.
 
 The full list of items and their uses can be viewed in game and for the sake of conciseness, can also be found on the [wiki](https://buckshot-roulette.fandom.com/wiki/Category:Items) rather than here.
+
+### Commands
 
 You win if your opponent runs out of lives whether that be by your hand or their own.
 

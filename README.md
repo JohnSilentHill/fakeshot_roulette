@@ -2,17 +2,31 @@
 
 # CONTENTS
 
-- [General Info](#general-info)
+- [Overview](#overview)
+- [How top play](#how-to-play)
 - [Boring Things](#boring-things)
 - [Roadmap](#roadmap)
 
-# General Info
+# Overview
 
 This is a Python text-based recreation of Buckshot Roulette by Mike Klubnika. <br/>
 
 Currently, there are *most* of the items from the original game bar a few multiplayer-specific ones that probably won't be added since this is offline only. 
 
 You can use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette_Wiki) or the 'info' command in-game for help.
+
+# How to play
+
+Imagine Russian Roulette but with a shotgun and a random amount of shells. A live shell deals damage, and a blank does not.
+
+You have the choice of shooting yourself, your opponent, or using an item to your advantage.<br/>
+If a live shell is shot at you, regardless of who fired it, it becomes your opponent's turn. This rule applies to them too.
+
+The full list of items and their uses can be viewed in game and for the sake of conciseness, can also be found on the [wiki](https://buckshot-roulette.fandom.com/wiki/Category:Items) rather than here.
+
+You win if your opponent runs out of lives whether that be by your hand or their own.
+
+Good luck.
 
 # Boring things
 

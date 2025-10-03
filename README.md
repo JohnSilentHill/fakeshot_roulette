@@ -2,9 +2,9 @@
 
 # CONTENTS
 
-[General Info](#generalinfo)
-[Boring Things](###boringthings)
-[Roadmap](#roadmap)
+- [General Info](#general-info)
+- [Boring Things](###boring-things)
+- [Roadmap](#roadmap)
 
 # General Info
 

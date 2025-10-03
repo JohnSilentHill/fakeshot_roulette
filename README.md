@@ -19,7 +19,7 @@ You can read below, or use the `'info'` command in-game for help.
 
 # How to play
 
-### Gameplay Loop
+### == Gameplay Loop ==
 
 > This is brief, please refer to the [wiki!](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette)
 
@@ -34,7 +34,7 @@ You win if your opponent runs out of lives whether that be by your hand or their
 
 Good luck.
 
-### Commands
+### == Commands ==
 
 Main menu:
 
@@ -70,7 +70,7 @@ Feel free to fork and create pull requests as you please. If you are more experi
 *For a more detailed version of this, see the file 'detailed_todo.md'*
 
 
-### Completed
+### == Completed ==
 
 - [x] Main game loop
 - [x] Basic usage of items
@@ -78,7 +78,7 @@ Feel free to fork and create pull requests as you please. If you are more experi
 - [x] Save file reading/loading (I think)
 - [X] Debug command
 
-### Upcoming
+### == Upcoming ==
 
 - [ ] More items to match original roster
 - [ ] Different rounds to mimic original game

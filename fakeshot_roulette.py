@@ -248,7 +248,7 @@ def shootSelf(game):
     shell = game.shellPool.pop(0) 
     if shell == 'live':
         typing("You point the barrel at yourself...\n"), time.sleep(1)
-        play_sound("live_self")  
+        play_sound("live_self"), play_sound("heartbeat")
         if game.isSawed:
             typing("\nSawed-off barrel deals double damage...\n-2 lives")
             game.playerLives -= 2
@@ -259,7 +259,7 @@ def shootSelf(game):
     else:
         typing("\nYou point the barrel at yourself...\n"), time.sleep(1)
         play_sound("shot_blank"), time.sleep(1)
-        typing("BLANK"), time.sleep(1)
+        typing("BLANK"), time.sleep(0.2)
         game.blankShells -= 1
     time.sleep(1.5), play_sound("rack") 
     if game.isSawed:
@@ -290,7 +290,7 @@ def shootAI(game):
     else:
         typing("\nYou point the barrel at the AI...\n"), time.sleep(1)
         play_sound("shot_blank"), time.sleep(1) 
-        typing("BLANK"), time.sleep(1)
+        typing("BLANK"), time.sleep(0.2)
         game.blankShells -= 1
     time.sleep(1.5), play_sound("rack") 
     if game.isSawed:
@@ -345,7 +345,7 @@ def aiTurn(game):
     shell = game.shellPool.pop(0)
     if shell == 'live':
         typing("\nThe AI points the barrel at you...\n"), time.sleep(1)
-        play_sound("live_self"), time.sleep(1)
+        play_sound("live_self"), play_sound("heartbeat"), time.sleep(1)
         typing("LIVE"), time.sleep(1)
         typing("-1 life.")
         game.playerLives -= 1
@@ -356,7 +356,7 @@ def aiTurn(game):
     else:
         typing("\nThe AI points the barrel at you...\n"), time.sleep(1)
         play_sound("shot_blank"), time.sleep(1)
-        typing("BLANK"), time.sleep(1)
+        typing("BLANK"), time.sleep(0.2)
         game.blankShells -= 1
         game.isSawed = False
     game.cap_lives()
@@ -381,9 +381,9 @@ def win(game):
     menu(game)
 
 def dead(game):
-    typing("You died. Exiting...")
+    typing("\nYou died. Exiting...")
     game.rounds == 0
-    quit()
+    menu()
 
 def shellDisplay(game):
     typing(f"\n{game.liveShells} LIVE. {game.blankShells} BLANK.") 

@@ -1,2 +1,1 @@
---\nINFO\n-----------------")
-        itemGuide()
+live_self

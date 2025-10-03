@@ -3,6 +3,8 @@
 # CONTENTS
 
 [General Info](#generalinfo)
+[Boring Things](###boringthings)
+[Roadmap](#roadmap)
 
 # General Info
 

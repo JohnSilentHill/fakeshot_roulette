@@ -4,8 +4,8 @@
 
 - [Overview](#overview)
 - [How to play](#how-to-play)
-  - [Gameplay Loop](##gameplay-loop)
-  - [Commands](##commands)
+  - [Gameplay Loop](#gameplay-loop)
+  - [Commands](#commands)
 - [Boring Things](#boring-things)
 - [Roadmap](#roadmap)
 

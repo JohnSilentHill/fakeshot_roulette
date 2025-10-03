@@ -21,6 +21,8 @@ You can use the official [wiki](https://buckshot-roulette.fandom.com/wiki/Bucksh
 
 ### Gameplay Loop
 
+> This is brief, please refer to the [wiki!](https://buckshot-roulette.fandom.com/wiki/Buckshot_Roulette)
+
 Imagine Russian Roulette but with a shotgun and a random amount of shells. A live shell deals damage, and a blank does not.
 
 You have the choice of shooting yourself, your opponent, or using an item to your advantage.<br/>
@@ -28,11 +30,13 @@ If a live shell is shot at you, regardless of who fired it, it becomes your oppo
 
 The full list of items and their uses can be viewed in game and for the sake of conciseness, can also be found on the [wiki](https://buckshot-roulette.fandom.com/wiki/Category:Items) rather than here.
 
-### Commands
-
 You win if your opponent runs out of lives whether that be by your hand or their own.
 
 Good luck.
+
+### Commands
+
+
 
 # Boring things
 

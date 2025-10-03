@@ -36,13 +36,25 @@ Good luck.
 
 ### Commands
 
+Main menu:
 
+- [start] -- Starts the game
+- [info] -- Opens the info menu
+- [quit] -- Saves data to a .json file and quits
+
+In-game:
+
+- [item] -- Uses a specified item, e.g 'saw', 'beer'
+- [me/ai] -- Shoots either you or your opponent
+- [debug] -- Shows some debug info for testing purposes
 
 # Boring things
 
 - For debug, you can use the `debug` command when it is **your turn** after starting the game. This isn't accessible on the main menu because it displays information regarding the current gamestate. I'm not sure it would have any use elsewhere.
+  
 - This project is highly WIP and you can view the roadmap below to get a general idea as to the progress so far. <br/>
 Feel free to fork and create pull requests as you please. If you are more experienced with Python, please do take a look. <br/>
+
 - Your save is blank by default, with no wins or money. You can simply play the game or edit your save manually to fix this glaring issue.
 
 > Open the `savegame.json` file under the parent directory in any text exitor of your choice. The values are pretty self-explanatory.

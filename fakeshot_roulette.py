@@ -1,4 +1,4 @@
-import pygame, os, json, sys, time, random, msvcrt
+import pygame, os, json, time, random, msvcrt
 
 pygame.mixer.init()
 

@@ -27,7 +27,7 @@ def save_game(game):
     save_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "savegame.json")
     with open(save_path, 'w') as f:
         json.dump(savegame, f, indent=4)
-    play_sound("click1"), print("Game saved.")
+    echo1("Game saved.")
 
 def play_sound(sound_name):
     base_dir = os.path.dirname(os.path.abspath(__file__)) 
@@ -37,6 +37,16 @@ def play_sound(sound_name):
         sound.play()
     else:
         print(f"Sound file {sound_name}.mp3 not found at {sound_path}")
+
+# Both of the below replace typing 'play_sound("click1"), print("")'
+
+def echo1(text): 
+    play_sound("click1")
+    print(text)
+
+def echo2(text):
+    play_sound("click2")
+    print(text)
 
 def play_bgm(filename):
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -104,7 +114,7 @@ def debug(game):
     ]
     for line in debugOutput:
         print(line)
-    time.sleep(2), play_sound("click1"), print("\nPress any key to resume...")
+    time.sleep(2), echo1("\nPress any key to resume...")
     msvcrt.getch(), play_sound("click2"), time.sleep(0.5)
 
     yourTurn(game)
@@ -114,16 +124,16 @@ def beer(game):
     play_sound("item_beer"), time.sleep(2)
 
     if not game.shellPool:
-        play_sound("click1"), print("\nNo shells left to eject.")
+        echo1("\nNo shells left to eject.")
         return
     ejected = game.shellPool.pop(0)
     if ejected == 'live':
         play_sound("eject_live"), time.sleep(1)
-        play_sound("click1"), print("\nYou ejected a live shell.")
+        echo1("\nYou ejected a live shell.")
         game.liveShells -= 1
     else:
         play_sound("eject_blank"), time.sleep(1)
-        play_sound("click1"), print("\nYou ejected a blank shell.")
+        echo1("\nYou ejected a blank shell.")
         game.blankShells -= 1
     if beer in game.playerItems:
         game.playerItems.remove(beer)
@@ -135,26 +145,26 @@ def saw(game):
     play_sound("item_saw"), time.sleep(3)
 
     game.isSawed = True
-    play_sound("click1"), print("\nYou saw off the barrel. Double damage next shot.")
+    echo1("\nYou saw off the barrel. Double damage next shot.")
     if saw in game.playerItems:
         game.playerItems.remove(saw)
 
     yourTurn(game)
 
 def magnifying_glass(game):
-    play_sound("click1"), print("\nYou check the chamber...")
+    echo1("\nYou check the chamber...")
     if not game.shellPool:
-        play_sound("click1"), print("The chamber is empty.")
+        echo1("The chamber is empty.")
     else:
         chambered = game.shellPool[0]
-        play_sound("click1"), print(f"The next shell is a {chambered.upper()}.")
+        echo1(f"The next shell is a {chambered.upper()}.")
     if magnifying_glass in game.playerItems:
         game.playerItems.remove(magnifying_glass)
 
     yourTurn(game)
 
 def handcuffs(game):
-    play_sound("click1"), print("\nYou give your opponent the handcuffs. They pass the next turn.")
+    echo1("\nYou give your opponent the handcuffs. They pass the next turn.")
     game.aiHandcuffed = True
     if handcuffs in game.playerItems:
         game.playerItems.remove(handcuffs)
@@ -165,15 +175,15 @@ def cigarettes(game):
     global money
     roll500 = random.randint(1,100)
     if roll500 == 1:
-        play_sound("click1"), print("\nFive Hundred Cigarettes.")
-        play_sound("click1"), print("\nYou gain $500")
+        echo1("\nFive Hundred Cigarettes.")
+        echo1("\nYou gain $500")
         game.money += 500
     game.money += 500
-    play_sound("click1"), print("\nYou smoke a cigarette...")
+    echo1("\nYou smoke a cigarette...")
     if game.playerLives == 3:
-        play_sound("click1"), print("Max health already.")
+        echo1("Max health already.")
     else:
-        play_sound("click1"), print("+1 life.")
+        echo1("+1 life.")
         game.playerLives += 1
     if cigarettes in game.playerItems:
         game.playerItems.remove(cigarettes)
@@ -181,7 +191,7 @@ def cigarettes(game):
     yourTurn(game)
 
 def phone(game):
-    play_sound("click1"), print("\nYou pick up your burner phone..."), time.sleep(1)
+    echo1("\nYou pick up your burner phone..."), time.sleep(1)
     play_sound("phone"), time.sleep(1)
 
     shellNum = random.randint(1, len(game.shellPool))  
@@ -197,20 +207,20 @@ def phone(game):
     yourTurn(game)
 
 def medicine(game):
-    play_sound("click1"), print("\nYou take a pill...")
+    echo1("\nYou take a pill...")
     time.sleep(1)
     medicineResult = random.randint(0,1)
     if medicineResult == 1:
         if game.playerLives == 1:
-            play_sound("click1"), print("Success... +2 lives.")
+            echo1("Success... +2 lives.")
             game.playerLives += 2
         elif game.playerLives ==2:
-            play_sound("click1"), print("Success... +1 life.")
+            echo1("Success... +1 life.")
             game.playerLives += 1
         else:
-            play_sound("click1"), print("Success... Max health already.")
+            echo1("Success... Max health already.")
     else:
-        play_sound("click1"), print("It was expired. -1 life.")
+        echo1("It was expired. -1 life.")
 
     yourTurn(game)
 
@@ -219,7 +229,7 @@ def medicine(game):
 
 def inverter(game):
     chambered = game.shellPool[0]
-    play_sound("click1"), print("\nYou invert the polarity of the shell...")
+    echo1("\nYou invert the polarity of the shell...")
     if chambered == 'live':
         game.shellPool[0] = 'blank' 
     else:
@@ -230,27 +240,32 @@ def inverter(game):
     if inverter in game.playerItems:
         game.playerItems.remove(inverter)
 
+def adrenaline(game):
+    print("Your opponent's items:")
+
+# ITEMS END
+
 def shootSelf(game):
     checkShells(game)
     shell = game.shellPool.pop(0) 
     if shell == 'live':
-        play_sound("click1"), print("You point the barrel at yourself...\n"), time.sleep(1)
+        echo1("You point the barrel at yourself...\n"), time.sleep(1)
         play_sound("live_self"), play_sound("heartbeat")
         if game.isSawed:
-            play_sound("click1"), print("\nSawed-off barrel deals double damage...\n-2 lives")
+            echo1("\nSawed-off barrel deals double damage...\n-2 lives")
             game.playerLives -= 2
         else:
-            play_sound("click1"), print("-1 life.")
+            echo1("-1 life.")
             game.playerLives -= 1
         game.liveShells -= 1
     else:
-        play_sound("click1"), print("\nYou point the barrel at yourself...\n"), time.sleep(1)
+        echo1("\nYou point the barrel at yourself...\n"), time.sleep(1)
         play_sound("shot_blank"), time.sleep(1)
-        play_sound("click1"), print("BLANK"), time.sleep(0.2)
+        echo1("BLANK"), time.sleep(0.2)
         game.blankShells -= 1
     time.sleep(1.5), play_sound("rack") 
     if game.isSawed:
-        play_sound("click1"), print("Barrel restored to default.")
+        echo1("Barrel restored to default.")
         game.isSawed = False
     game.cap_lives()
     if game.playerLives <= 0:
@@ -264,24 +279,24 @@ def shootAI(game):
     checkShells(game)
     shell = game.shellPool.pop(0)
     if shell == 'live':
-        play_sound("click1"), print("\nYou point the barrel at the AI...\n"), time.sleep(1)
+        echo1("\nYou point the barrel at the AI...\n"), time.sleep(1)
         play_sound("live_ai"), time.sleep(1)
-        play_sound("click1"), print("LIVE"), time.sleep(1)
+        echo1("LIVE"), time.sleep(1)
         if game.isSawed:
-            play_sound("click1"), print("\nSawed-off barrel deals double damage.\n-2 AI lives.")
+            echo1("\nSawed-off barrel deals double damage.\n-2 AI lives.")
             game.aiLives -= 2
         else:
-            play_sound("click1"), print("\n-1 AI life.")
+            echo1("\n-1 AI life.")
             game.aiLives -= 1
         game.liveShells -= 1
     else:
-        play_sound("click1"), print("\nYou point the barrel at the AI...\n"), time.sleep(1)
+        echo1("\nYou point the barrel at the AI...\n"), time.sleep(1)
         play_sound("shot_blank"), time.sleep(1) 
-        play_sound("click1"), print("BLANK"), time.sleep(0.2)
+        echo1("BLANK"), time.sleep(0.2)
         game.blankShells -= 1
     time.sleep(1.5), play_sound("rack") 
     if game.isSawed:
-        play_sound("click1"), print("Barrel restored to default.")
+        echo1("Barrel restored to default.")
         game.isSawed = False
     game.cap_lives()
     if game.aiLives <= 0:
@@ -295,13 +310,13 @@ def yourTurn(game):
         return
     checkShells(game)
     time.sleep(0.5)
-    play_sound("click2"), print("\n----- YOUR TURN -----\n")
+    echo2("\n----- YOUR TURN -----\n")
     time.sleep(0.5)
-    play_sound("click1"), print(f"YOU: {game.playerLives} LIVES. AI: {game.aiLives} LIVES.\n"), time.sleep(0.4)
-    play_sound("click1"), print("INVENTORY:"), time.sleep(0.4)
+    echo1(f"YOU: {game.playerLives} LIVES. AI: {game.aiLives} LIVES.\n"), time.sleep(0.4)
+    echo1("INVENTORY:"), time.sleep(0.4)
     itemsDisplay = ", ".join(item.__name__ for item in game.playerItems)
-    play_sound("click1"), print(itemsDisplay), time.sleep(0.4)
-    play_sound("click1"), print("\n[itemname] or [me/ai]")
+    echo1(itemsDisplay), time.sleep(0.4)
+    echo1("\n[itemname] or [me/ai]")
     turnAction = input("> ").strip().lower()
     for item in game.playerItems:
         if turnAction == item.__name__.lower():
@@ -314,7 +329,7 @@ def yourTurn(game):
     elif turnAction == "debug":
         debug(game)
     else:
-        play_sound("click1"), print("Invalid input.")
+        echo1("Invalid input.")
         yourTurn(game)
 
 def aiTurn(game):
@@ -322,28 +337,28 @@ def aiTurn(game):
         win(game)
         return
     if game.aiHandcuffed:
-        play_sound("click1"), print("\nAI skips its turn due to handcuffs.")
+        echo1("\nAI skips its turn due to handcuffs.")
         game.aiHandcuffed = False
         yourTurn(game)
         return
     checkShells(game)
     time.sleep(0.5)
-    play_sound("click1"), print("\n----- AI'S TURN -----")
+    echo1("\n----- AI'S TURN -----")
     shell = game.shellPool.pop(0)
     if shell == 'live':
-        play_sound("click1"), print("\nThe AI points the barrel at you...\n"), time.sleep(1)
+        echo1("\nThe AI points the barrel at you...\n"), time.sleep(1)
         play_sound("live_self"), play_sound("heartbeat"), time.sleep(1)
-        play_sound("click1"), print("LIVE"), time.sleep(1)
-        play_sound("click1"), print("-1 life.")
+        echo1("LIVE"), time.sleep(1)
+        echo1("-1 life.")
         game.playerLives -= 1
         game.liveShells -= 1
         game.isSawed = False
         if game.playerLives == 1:
             play_sound("buzz"), print("\nCAREFUL NOW...")
     else:
-        play_sound("click1"), print("\nThe AI points the barrel at you...\n"), time.sleep(1)
+        echo1("\nThe AI points the barrel at you...\n"), time.sleep(1)
         play_sound("shot_blank"), time.sleep(1)
-        play_sound("click1"), print("BLANK"), time.sleep(0.2)
+        echo1("BLANK"), time.sleep(0.2)
         game.blankShells -= 1
         game.isSawed = False
     game.cap_lives()
@@ -354,21 +369,21 @@ def aiTurn(game):
 
 def checkShells(game):
     if not game.shellPool:
-        play_sound("click1"), print("\nNO SHELLS LEFT...")
+        echo1("\nNO SHELLS LEFT...")
         time.sleep(0.2)
         preGame(game)
 
 def win(game):
     global money
-    play_sound("click1"), print("\nYou beat the AI.\n"), time.sleep(0.5), play_sound("click1"), print("Your winnings:"), time.sleep(0.5)
-    play_sound("click1"), print("$2000")
+    echo1("\nYou beat the AI.\n"), time.sleep(0.5), echo1("Your winnings:"), time.sleep(0.5)
+    echo1("$2000")
     game.money += 2000
     game.wins += 1
     game.rounds += 1
     menu(game)
 
 def dead(game):
-    play_sound("click1"), print("\nYou died. Exiting...")
+    echo1("\nYou died. Exiting...")
     game.rounds == 0
     menu()
 
@@ -398,12 +413,13 @@ def itemGuide(game):
         "CIGARETTES:         Restores 1 health.",
         "PHONE:              Reveals info about a random shell.",
         "MEDICINE:           If normal: restores 2 lives, if expired: removes 1 life.",
-        "INVERTER:           Changes the type of round currently chambered."
+        "INVERTER:           Changes the type of round currently chambered.",
+        "ADRENALINE:         Allows the user to take an item from their opponent."
     ]
     for line in lines:
         print(line)
 
-    time.sleep(2), play_sound("click1"), print("\nPress any key to resume...")
+    time.sleep(2), echo1("\nPress any key to resume...")
     msvcrt.getch()
     menu(game)
 
@@ -413,8 +429,9 @@ def preGame(game):
     game.shellPool = ['live'] * game.liveShells + ['blank'] * game.blankShells
     random.shuffle(game.shellPool)
 
-    all_items = [phone, phone, phone]
-    # all_items = [beer, saw, magnifying_glass, handcuffs, cigarettes, phone, medicine, inverter]
+    # Use the below for debugging, just remove #
+    # all_items = [phone, phone, phone] 
+    all_items = [beer, saw, magnifying_glass, handcuffs, cigarettes, phone, medicine, inverter]
     game.playerItems = random.sample(all_items, 3)
     game.reset_lives()
     shellDisplay(game)
@@ -439,8 +456,8 @@ def menu(game):
     start_bgm()
     print(logoText)
     time.sleep(0.5)
-    play_sound("click2"), print(f"You have {game.wins} win(s)."), time.sleep(0.5)
-    play_sound("click1"), print("Use [start], [info], or [quit] to save and quit...")
+    echo2(f"You have {game.wins} win(s)."), time.sleep(0.5)
+    echo1("Use [start], [info], or [quit] to save and quit...")
     menuInput = input("> ").strip().lower()
     if menuInput == "start":
         pause_bgm(), play_sound("start")
@@ -448,16 +465,16 @@ def menu(game):
     elif menuInput == "info":
         pause_bgm(), play_sound("crt_sfx"), time.sleep(0.25)
         print("Loading info...\n"), time.sleep(1.6)
-        play_sound("click2"), print(infoTitle1), playGuide(), time.sleep(1)
-        play_sound("click2"), print(infoTitle2), itemGuide(game)
+        echo2(infoTitle1), playGuide(), time.sleep(1)
+        echo2(infoTitle2), itemGuide(game)
         return menu(game)
     elif menuInput == "quit":
         pause_bgm(), play_sound("select")
         save_game(game)
-        play_sound("click1"), print("\nExiting...")
+        echo1("\nExiting...")
         quit()
     else:
-        play_sound("click1"), print("\nNot a valid input.")
+        echo1("\nNot a valid input.")
         return menu(game)
 
 if __name__ == "__main__":

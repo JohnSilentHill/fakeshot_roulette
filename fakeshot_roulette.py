@@ -489,7 +489,7 @@ def startNewRound(game):
 
     # Resets your dumb items
     # all_items = [saw, saw, saw] -- Unhash this for debug
-    all_items = [beer, saw, magnifying_glass, handcuffs, cigarettes, phone, medicine, inverter]
+    all_items = [beer, saw, magnifying_glass, handcuffs, cigarettes, phone, medicine, inverter, adrenaline]
     game.playerItems = random.sample(all_items, 3)
 
     reloadShotgun(game)

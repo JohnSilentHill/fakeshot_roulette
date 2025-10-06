@@ -73,6 +73,9 @@ class GameState:
     def __init__(state):
         state.money = 0
         state.rounds = 0
+        state.roundsAbove2HP = 0
+        state.correctShells = 0
+        state.incorrectShells = 0
         state.wins = 0
         state.playerLives = 3
         state.aiLives = 3
@@ -82,7 +85,9 @@ class GameState:
         state.liveShells = 0
         state.blankShells = 0
         state.shellPool = []
-        state.playerItems = []
+        
+        all_items = [beer, saw, magnifying_glass, handcuffs, cigarettes, phone, medicine, inverter]
+        state.playerItems = random.sample(all_items, 3)
 
     def reset_lives(state):
         state.playerLives = 3
@@ -101,6 +106,8 @@ def debug(game):
         "",
         f"money:             {game.money}",
         f"wins:              {game.wins}",
+        f"rounds:            {game.rounds}",
+        f"roundsAbove2HP:    {game.roundsAbove2HP}",
         f"playerLives:       {game.playerLives}",
         f"aiLives:           {game.aiLives}",
         f"isSawed?:          {game.isSawed}",
@@ -108,9 +115,12 @@ def debug(game):
         f"aiHandcuffed?:     {game.aiHandcuffed}",
         f"liveShells:        {game.liveShells}",
         f"liveShells:        {game.blankShells}",
+        f"correctShells:     {game.correctShells}",
+        f"incorrectShells:   {game.incorrectShells}",
         f"currentShell:      {shell}",
         f"shellPool:         {game.shellPool}",
         f"playerItems:       [{itemsDisplay}]"
+        
     ]
     for line in debugOutput:
         print(line)
@@ -152,7 +162,8 @@ def saw(game):
     yourTurn(game)
 
 def magnifying_glass(game):
-    echo1("\nYou check the chamber...")
+    time.sleep(0.5), echo1("\nYou check the chamber...")
+    time.sleep(1)
     if not game.shellPool:
         echo1("The chamber is empty.")
     else:
@@ -258,11 +269,13 @@ def shootSelf(game):
             echo1("-1 life.")
             game.playerLives -= 1
         game.liveShells -= 1
+        game.incorrectShells += 1
     else:
         echo1("\nYou point the barrel at yourself...\n"), time.sleep(1)
         play_sound("shot_blank"), time.sleep(1)
         echo1("BLANK"), time.sleep(0.2)
         game.blankShells -= 1
+        game.correctShells += 1
     time.sleep(1.5), play_sound("rack") 
     if game.isSawed:
         echo1("Barrel restored to default.")
@@ -289,11 +302,13 @@ def shootAI(game):
             echo1("\n-1 AI life.")
             game.aiLives -= 1
         game.liveShells -= 1
+        game.correctShells += 1
     else:
         echo1("\nYou point the barrel at the AI...\n"), time.sleep(1)
         play_sound("shot_blank"), time.sleep(1) 
         echo1("BLANK"), time.sleep(0.2)
         game.blankShells -= 1
+        game.incorrectShells += 1
     time.sleep(1.5), play_sound("rack") 
     if game.isSawed:
         echo1("Barrel restored to default.")
@@ -315,7 +330,7 @@ def yourTurn(game):
     echo1(f"YOU: {game.playerLives} LIVES. AI: {game.aiLives} LIVES.\n"), time.sleep(0.4)
     echo1("INVENTORY:"), time.sleep(0.4)
     itemsDisplay = ", ".join(item.__name__ for item in game.playerItems)
-    echo1(itemsDisplay), time.sleep(0.4)
+    echo1(itemsDisplay)
     echo1("\n[itemname] or [me/ai]")
     turnAction = input("> ").strip().lower()
     for item in game.playerItems:
@@ -371,21 +386,42 @@ def checkShells(game):
     if not game.shellPool:
         echo1("\nNO SHELLS LEFT...")
         time.sleep(0.2)
-        preGame(game)
+        reloadShotgun(game)
 
 def win(game):
-    global money
-    echo1("\nYou beat the AI.\n"), time.sleep(0.5), echo1("Your winnings:"), time.sleep(0.5)
-    echo1("$2000")
-    game.money += 2000
-    game.wins += 1
+    echo1("\nYou beat the AI in this round.\n")
     game.rounds += 1
-    menu(game)
+
+    if game.playerLives > 2:
+        game.roundsAbove2HP += 1
+
+    echo1(f"Round {game.rounds}/3 complete.")
+
+    if game.rounds >= 3:
+        echo1("You win.")
+
+        incorrects = game.incorrectShells if game.incorrectShells > 0 else 1
+
+        raw_gain = (game.rounds * game.roundsAbove2HP * game.correctShells) / incorrects
+        moneyGain = round(raw_gain * 100)
+
+        echo1("Your winnings:")
+        echo1(f"${moneyGain}")
+        game.money += moneyGain
+
+        game.wins += 1
+        save_game(game)
+        menu(game)
+    else:
+        echo1("\nReloading for next round...")
+        time.sleep(2)
+        startNewRound(game)  
 
 def dead(game):
-    echo1("\nYou died. Exiting...")
-    game.rounds == 0
-    menu()
+    echo1("\nYou died.")
+    echo1(f"You survived {game.rounds} rounds.")
+    save_game(game)
+    menu(game)
 
 def shellDisplay(game):
     play_sound("buzz"), print(f"\n{game.liveShells} LIVE. {game.blankShells} BLANK.") 
@@ -423,21 +459,17 @@ def itemGuide(game):
     msvcrt.getch()
     menu(game)
 
-def preGame(game):
+def reloadShotgun(game):
     game.liveShells = random.randint(1, 4)
     game.blankShells = random.randint(1, 4)
     game.shellPool = ['live'] * game.liveShells + ['blank'] * game.blankShells
     random.shuffle(game.shellPool)
 
-    # Use the below for debugging, just remove #
-    # all_items = [phone, phone, phone] 
-    all_items = [beer, saw, magnifying_glass, handcuffs, cigarettes, phone, medicine, inverter]
-    game.playerItems = random.sample(all_items, 3)
-    game.reset_lives()
+    game.cap_lives() # Max lives is always 3... for now
+
     shellDisplay(game)
 
     shellCount = game.liveShells + game.blankShells
-
     for _ in range(shellCount):
         play_sound("insert_shell")
         time.sleep(0.275) 
@@ -448,6 +480,18 @@ def preGame(game):
     time.sleep(0.6)
 
     yourTurn(game)
+
+def startNewRound(game):
+    echo1("\n--- NEW ROUND ---") # CHANGE THIS TO DISPLAY ROUND NUMBER
+
+    # Resets lives and stuff
+    game.reset_lives()
+
+    # Resets your dumb items
+    all_items = [beer, saw, magnifying_glass, handcuffs, cigarettes, phone, medicine, inverter]
+    game.playerItems = random.sample(all_items, 3)
+
+    reloadShotgun(game)
 
 def menu(game):
     global logoText
@@ -461,7 +505,7 @@ def menu(game):
     menuInput = input("> ").strip().lower()
     if menuInput == "start":
         pause_bgm(), play_sound("start")
-        time.sleep(1), preGame(game)
+        time.sleep(1), startNewRound(game)
     elif menuInput == "info":
         pause_bgm(), play_sound("crt_sfx"), time.sleep(0.25)
         print("Loading info...\n"), time.sleep(1.6)

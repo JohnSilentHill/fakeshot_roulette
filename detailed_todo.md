@@ -1,7 +1,7 @@
 # To-do
 This is a to-do list that just goes into greater depth than the roadmap.
 
-## 1. Complex AI [ ]
+## Complex AI [-]
 
 Currently the AI will always shoot by default. The code for this right now is extremely basic and goes through a sequence of logic as follows:
 ```
@@ -58,7 +58,7 @@ As for what you do with this money... nothing. It's sort of useless in Buckshot 
 
 As of now, I don't plan on changing the item pool based on if it's double or nothing, but this may come later down the line once the main game is 100% complete.
 
-## 3. Misc Items [ ]
+## 3. Misc Items [-]
 
 ### Inverter
 

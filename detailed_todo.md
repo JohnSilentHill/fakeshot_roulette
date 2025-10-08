@@ -1,7 +1,7 @@
 # To-do
 This is a to-do list that just goes into greater depth than the roadmap.
 
-## 1. Complex AI
+## 1. Complex AI [ ]
 
 Currently the AI will always shoot by default. The code for this right now is extremely basic and goes through a sequence of logic as follows:
 ```
@@ -32,7 +32,7 @@ if gamestate = False:
 
 Obviously there is much more logic that goes into using an item. For example, they may be low on health so using cigarettes or medicine should ALWAYS take priority if they recently took damage. They may also take a risk - say 20% of all moves - where they will just shoot the player for the sake of it. But generally, it should act as a player would only based on the information they have stored in gamestates.
 
-## 2. Money system.
+## 2. Money system [X]
 
 This should be dynamic according to the number of rounds played and something else like times near death. I don't know how it works for the original game so maybe I'll need to look into that.
 
@@ -58,7 +58,7 @@ As for what you do with this money... nothing. It's sort of useless in Buckshot 
 
 As of now, I don't plan on changing the item pool based on if it's double or nothing, but this may come later down the line once the main game is 100% complete.
 
-## 3. Misc Items
+## 3. Misc Items [ ]
 
 ### Inverter
 

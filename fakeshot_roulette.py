@@ -9,7 +9,7 @@ logoText = """
 |__|  |__|__|__|__|_____|_____|__|__|_____| |_|    |__|__|_____|_____|_____|_____| |_|   |_| |_____|
 """
 
-infoTitle1 = """
+infoTitle1 = """ # This doesn't actually show in terminal, but it looks cool here
 ＨＯＷ  ＴＯ  ＰＬＡＹ
 """
 

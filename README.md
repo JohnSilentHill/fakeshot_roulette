@@ -55,7 +55,7 @@ Feel free to fork and create pull requests as you please. If you are more experi
 
 - Your save is blank by default, with no wins or money. You can simply play the game or edit your save manually to fix this glaring issue.
 
-> Open the `savegame.json` file under the parent directory in any text exitor of your choice. The values are pretty self-explanatory.
+> Open the `savegame.json` file under the parent directory in a text exitor of your choice. The values are pretty self-explanatory.
 
 ------
 

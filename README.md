@@ -77,14 +77,14 @@ Feel free to fork and create pull requests as you please. If you are more experi
 - [x] Optimisation using gamestates
 - [x] Save file reading/loading (I think)
 - [X] Debug command
+- [X] More items to match original roster
+- [X] Different rounds to mimic original game
+- [X] Money
+- [X] Better text output for a more visually appealing experience
 
 ### == Upcoming ==
 
-- [ ] More items to match original roster
-- [ ] Different rounds to mimic original game
 - [ ] Intelligent AI -- I will literally just make it so it judges whether or not to shoot.
 - [ ] Difficulties
-- [ ] Money
-- [ ] Better text output for a more visually appealing experience
 
 
